@@ -1,6 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
+import classNames from 'classnames';
 
 function Navbar() {
+  const [hamburgerMenuOpen, setHamburgerMenuOpen] = useState(false);
+  const menuClass = classNames({
+    'w-full': true,
+    'flex-grow': true,
+    'lg:flex': true,
+    'lg:items-center': true,
+    'lg:w-auto': true,
+    block: hamburgerMenuOpen,
+    hidden: !hamburgerMenuOpen,
+  });
+
   return (
     <div>
       <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6">
@@ -19,7 +31,11 @@ function Navbar() {
           </span>
         </div>
         <div className="block lg:hidden">
-          <button className="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+          <button
+            type="button"
+            className="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white focus:outline-none"
+            onClick={() => setHamburgerMenuOpen(!hamburgerMenuOpen)}
+          >
             <svg
               className="fill-current h-3 w-3"
               viewBox="0 0 20 20"
@@ -30,7 +46,7 @@ function Navbar() {
             </svg>
           </button>
         </div>
-        <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+        <div className={menuClass}>
           <div className="text-sm lg:flex-grow">
             <a
               href="#responsive-header"
